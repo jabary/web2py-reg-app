@@ -11,6 +11,11 @@ def index():
 
     return dict(courses=courses)
 
+def list_students():
+
+    students = db.executesql("SELECT * FROM students", as_dict=True)
+
+    return dict(students=students)
 
 def addStudentForm():
 
@@ -24,18 +29,40 @@ def add_user():
     return locals()
 
 
+
+
 def addStudent():
 
-    if request.vars['name']:
-        name = request.vars['name']
+    if request.vars['firstName']:
+        first_name = request.vars['firstName']
+        last_name = request.vars['lastName']
         email = request.vars['email']
-        major = request.vars['major']
 
-        db.executesql("INSERT INTO students (first_name, email) VALUES ( '" + name + "', '" + email + "')")
+        db.executesql("INSERT INTO students (first_name, last_name, email) VALUES (%s, %s, %s)", placeholders=(first_name,last_name, email))
     else:
         redirect(URL('addStudentForm'))
 
     return locals()
+
+
+def details():
+
+    if request.vars['id']:
+        id = request.vars['id']
+        students = db.executesql("SELECT * FROM students WHERE id=" + id, as_dict=True)
+
+    return dict(student=students[0], students=students)
+
+
+def delete():
+
+    if request.vars['id']:
+        id = request.vars['id']
+
+        db.executesql("DELETE FROM students WHERE id=" + id)
+    
+    redirect(URL('list_students'))
+
 
 
 def addCourse():
