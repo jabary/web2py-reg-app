@@ -28,7 +28,49 @@ def add_user():
 
     return locals()
 
+def testviews():
+   
 
+    return locals()
+
+
+def city():
+
+    grid = SQLFORM.grid(db.city)
+
+    return locals()
+
+
+def addSchedule():
+
+    form = SQLFORM(db.courseSchedules)
+    if form.process().accepted:
+       response.flash = 'form accepted'
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill out the form'
+
+    return dict(form=form)
+
+def courses():
+
+    grid = SQLFORM.grid(db.courses)
+
+    return dict(grid=grid)
+
+def addcourse():
+
+
+    form = SQLFORM(db.courses)
+    if form.process().accepted:
+       response.flash = 'form accepted'
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill out the form'
+
+    return dict(form=form)
 
 
 def addStudent():
@@ -65,21 +107,21 @@ def delete():
 
 
 
-def addCourse():
+# def addCourse():
 
-    if request.get_vars:
-        code = request.vars['code']
-        name = request.vars['name']
-        description = request.vars['description']
-    else:
-        redirect(URL('addCourseForm'))
+#     if request.get_vars:
+#         code = request.vars['code']
+#         name = request.vars['name']
+#         description = request.vars['description']
+#     else:
+#         redirect(URL('addCourseForm'))
 
 
-    return locals()
+#     return locals()
 
-def addCourseForm():
+# def addCourseForm():
 
-    return locals()
+#     return locals()
 
 # ---- API (example) -----
 @auth.requires_login()

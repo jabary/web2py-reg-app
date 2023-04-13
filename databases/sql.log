@@ -154,3 +154,15 @@ success!
 success!
 success!
 success!
+timestamp: 2023-04-09T13:01:41.185746
+CREATE TABLE `courses`(
+    `id` INT AUTO_INCREMENT NOT NULL,
+    `code` VARCHAR(512),
+    `name` VARCHAR(512),
+    `description` VARCHAR(512),
+    `prerequisites` VARCHAR(512),
+    `instructor` VARCHAR(512),
+    `capacity` INTEGER,
+    `scheduleid` INTEGER,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB CHARACTER SET utf8;
